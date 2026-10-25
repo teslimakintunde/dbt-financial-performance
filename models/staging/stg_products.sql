@@ -14,6 +14,8 @@ select
     country_of_origin,
     
     is_active,
+     cast(current_stock_level as int64) as current_stock_level,
+     cast(reorder_level as int64) as reorder_level,
 
     -- Parse launch dates after converting 'Sept' to standard abbreviated 'Sep' form
     coalesce(
