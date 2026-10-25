@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: raw_sales_data
+    database: portfolioproject-511416  # Your Google Cloud Project ID
+    dataset: sales_data               # The raw source dataset holding your CSVs
+    tables:
+      - name: sales
+      - name: customers
+      - name: products
