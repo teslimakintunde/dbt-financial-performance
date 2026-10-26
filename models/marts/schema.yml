@@ -1,0 +1,64 @@
+version: 2
+
+models:
+  - name: fct_financial_performance
+    description: "Core financial table capturing profit and margins across categories."
+    columns:
+      - name: order_id
+        description: "Primary key for sales orders."
+        tests:
+          - not_null
+      - name: net_profit
+        description: "Net revenue minus COGS and shipping costs."
+        tests:
+          - not_null
+      - name: profit_margin_percentage
+        description: "Percentage margin. Checked to prevent impossible or empty values."
+
+  - name: fct_shipping_logistics
+    description: "Tracks delivery performance and SLA compliance metrics."
+    columns:
+      - name: order_id
+        tests:
+          - not_null
+      - name: is_late_shipment
+        description: "Binary flag (1 for late, 0 for on-time)."
+        tests:
+          - not_null
+          - accepted_values:
+              values: ["0", "1"]
+
+  - name: fct_customer_loyalty_analytics
+    description: "Aggregated overview of spending habits and discount usage by loyalty tier."
+    columns:
+      - name: loyalty_tier
+        description: "The membership tier of the customer group."
+        tests:
+          - unique
+          - not_null
+          - accepted_values:
+              values: ['Bronze', 'Silver', 'Gold', 'Platinum', 'Non-Member']
+
+  - name: fct_marketing_campaign_roi
+    description: "Evaluates marketing efficacy by looking at average customer LTV by campaign."
+    columns:
+      - name: acquisition_campaign_id
+        tests:
+          - not_null
+
+  - name: fct_inventory_restock_alerts
+    description: "Automated operational alert list tracking items falling below reorder limits."
+    columns:
+      - name: product_id
+        tests:
+          - unique
+          - not_null
+      - name: restocking_priority
+        tests:
+          - not_null
+          - accepted_values:
+              values: [
+                '1 - Critical (High Velocity)', 
+                '2 - Medium Priority', 
+                '3 - Low Priority (Slow Mover)'
+              ]
