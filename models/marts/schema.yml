@@ -26,7 +26,8 @@ models:
         tests:
           - not_null
           - accepted_values:
-              values: ["0", "1"]
+              arguments:
+                values: ["0", "1"]
 
   - name: fct_customer_loyalty_analytics
     description: "Aggregated overview of spending habits and discount usage by loyalty tier."
@@ -37,7 +38,8 @@ models:
           - unique
           - not_null
           - accepted_values:
-              values: ['Bronze', 'Silver', 'Gold', 'Platinum', 'Non-Member']
+              arguments:
+                values: ['Bronze', 'Silver', 'Gold', 'Platinum', 'Non-Member']
 
   - name: fct_marketing_campaign_roi
     description: "Evaluates marketing efficacy by looking at average customer LTV by campaign."
@@ -57,8 +59,9 @@ models:
         tests:
           - not_null
           - accepted_values:
-              values: [
-                '1 - Critical (High Velocity)', 
-                '2 - Medium Priority', 
-                '3 - Low Priority (Slow Mover)'
-              ]
+              arguments:
+                values: [
+                  '1 - Critical (High Velocity)', 
+                  '2 - Medium Priority', 
+                  '3 - Low Priority (Slow Mover)'
+                ]
